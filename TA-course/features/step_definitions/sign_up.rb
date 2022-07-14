@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^Sign in page is opened$/) do
   @sign_in_page = SignInPage.new
   @sign_in_page.load
@@ -20,6 +22,7 @@ When(/^I register user via "([^"]*)"$/) do |method|
   else
     raise 'User registration method is not defined'
   end
-  user_credentials = {username: @user.username, password: @user.password, id: JSON.parse(response.body)[0]['id']}.to_json
-  File.open('user.json', 'w') { |file| file.write( user_credentials) }
+  user_credentials = { username: @user.username, password: @user.password,
+                       id: JSON.parse(response.body)[0]['id'] }.to_json
+  File.open('user.json', 'w') { |file| file.write(user_credentials) }
 end

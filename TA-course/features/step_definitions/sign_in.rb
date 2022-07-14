@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^Gitlab sing up page is opened$/) do
   @sign_in_page = SignInPage.new
   @sign_in_page.load

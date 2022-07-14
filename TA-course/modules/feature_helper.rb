@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FeatureHelper
   def sign_in_user(username, password)
     @sign_in_page = SignInPage.new
