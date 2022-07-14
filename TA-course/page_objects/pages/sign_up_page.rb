@@ -1,4 +1,5 @@
 class SignUpPage < SitePrism::Page
+  set_url 'https://gitlab.testautomate.me/users/sign_up'
 
   element :first_name_field, '#new_user_first_name'
   element :last_name_field, '#new_user_last_name'
