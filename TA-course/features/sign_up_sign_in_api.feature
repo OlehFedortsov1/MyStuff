@@ -9,3 +9,4 @@ Feature: Sign up and then sign in
     Given Gitlab sing up page is opened
     When I sign in as a preregistered user
     Then I see that new user is logged in via page
+    And I can delete user via API

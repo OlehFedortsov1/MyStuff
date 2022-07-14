@@ -1,9 +1,6 @@
 When(/^I register user via API$/) do
   @user = User.new
 
-  user_credentials = {username: @user.username, password: @user.password}.to_json
-  File.open('user.json', 'w') { |file| file.write( user_credentials) }
-
   payload ={
     "name": "#{@user.firstname} #{@user.lastname}",
     "username": @user.username,
@@ -11,8 +8,10 @@ When(/^I register user via API$/) do
     "password": @user.password,
     "skip_confirmation": true
   }
-  RestClient.post('https://gitlab.testautomate.me/api/v4/users', payload, headers={'Authorization': 'Bearer FKzy_BpV5wAybKf7Z9JX'})
+  response = RestClient.post('https://gitlab.testautomate.me/api/v4/users', payload, headers={'Authorization': 'Bearer FKzy_BpV5wAybKf7Z9JX'})
 
+  user_credentials = {username: @user.username, password: @user.password, id: JSON.parse(response.body)['id']}.to_json
+  File.open('user.json', 'w') { |file| file.write( user_credentials) }
 end
 
 Then(/^And I see that user is registered via API$/) do
@@ -26,4 +25,10 @@ end
 Then(/^I see that new user is logged in via page$/) do
   @home_page = HomePage.new
   expect(@home_page.welcome_msg.text).to include 'Welcome to GitLab'
+end
+
+And(/^I can delete user via API$/) do
+  user_credentials = JSON.parse(File.read('user.json'))
+  response = RestClient.delete("https://gitlab.testautomate.me/api/v4/users/#{user_credentials['id']}?hard_delete=true",  headers={Authorization: 'Bearer FKzy_BpV5wAybKf7Z9JX'})
+  expect(response.code).to eql 204
 end
