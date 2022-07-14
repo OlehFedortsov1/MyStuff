@@ -1,7 +1,7 @@
 Feature: Sign up and then sign in
 
   Scenario: User can sign up via API
-    When I register user via API
+    When I register user via "API"
     Then And I see that user is registered via API
 
   Scenario: Register user can sign up

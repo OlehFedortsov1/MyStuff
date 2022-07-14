@@ -25,4 +25,4 @@ at_exit do
   File.delete('user.json') if File.exist?('user.json')
 end
 
-World(FeatureHelper)
+World(FeatureHelper, APIWrapper)
