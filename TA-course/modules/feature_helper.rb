@@ -20,4 +20,18 @@ module FeatureHelper
     @sign_up_page.password_field.set user.password
     @sign_up_page.register_btn.click
   end
+
+  def welcome_page
+    @welcome_page = WelcomePage.new
+    @welcome_page.load
+    @welcome_page.developer_selector.click
+    @welcome_page.get_started_button.click
+  end
+
+  def project_name(project_name)
+    @blank_project_page = BlankProjectPage.new
+    @blank_project_page.load
+    @blank_project_page.project_name_field.set project_name
+    @blank_project_page.create_project_btn.click
+  end
 end

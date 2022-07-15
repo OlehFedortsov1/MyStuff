@@ -7,6 +7,7 @@ require 'rest-client'
 require 'rspec/expectations'
 require 'selenium-webdriver'
 require 'site_prism'
+require 'securerandom'
 
 require_all 'models'
 require_all 'modules'
